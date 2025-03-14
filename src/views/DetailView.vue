@@ -8,13 +8,13 @@
       <div class="menu">
         <img class="responsive" src="../assets/logo.png" alt="Logo" />
       </div>
-      <movie-detail></movie-detail>
+      <MovieDetail></MovieDetail>
     </div>
   </div>
 </template>
 
 <script>
-import MovieDetail from "@/components/MovieDetail.vue";
+import MovieDetail from '@/components/MovieDetail.vue'
 
 export default {
   name: "DetailView",

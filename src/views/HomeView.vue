@@ -49,10 +49,10 @@
         </form>
 
         <div id="displayMovies">
-          <HelloWorld :title="Title" :year="Year" :poster="Poster"/>
-          <HelloWorld :title="Title" :year="Year" :poster="Poster"/>
-          <HelloWorld :title="Title" :year="Year" :poster="Poster"/>
-          <HelloWorld :title="Title" :year="Year" :poster="Poster"/>
+          <MovieMini :title="Title" :year="Year" :poster="Poster"/>
+          <MovieMini :title="Title" :year="Year" :poster="Poster"/>
+          <MovieMini :title="Title" :year="Year" :poster="Poster"/>
+          <MovieMini :title="Title" :year="Year" :poster="Poster"/>
         </div>
       </div>
     </div>
@@ -61,12 +61,12 @@
 
 <script>
 // @ is an alias to /src
-import HelloWorld from '@/components/MovieMini.vue'
+import MovieMini from '@/components/MovieMini.vue'
 
 export default {
   name: 'HomeView',
   components: {
-    HelloWorld,
+    MovieMini,
   },
   data() {
     return {
