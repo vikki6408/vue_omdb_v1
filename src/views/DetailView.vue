@@ -3,7 +3,7 @@
     rel="stylesheet"
     href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
   />
-  <div class="about">
+  <div class="details">
     <div class="repartition">
       <div class="menu">
         <img class="responsive" src="../assets/logo.png" alt="Logo" />

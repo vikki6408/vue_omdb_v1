@@ -2,7 +2,7 @@
   <div class="displayMovie">
     <img id="movieMiniature" :src="poster" />
     <div id="movieFooter">
-      <a style="color: blue; font-size: 30px"> {{ title }} </a>
+      <router-link to="/details" style="color: blue; font-size: 30px"> {{ title }} </router-link>
       <p>{{ year }}</p>
     </div>
   </div>

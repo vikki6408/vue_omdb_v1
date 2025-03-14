@@ -8,7 +8,7 @@
         <div id="rated">
           <h1>{{Title}}</h1>
           <h3 id="cadre">{{Rated}}</h3>
-          <h3><a id="getback" href="home.html">Get back</a></h3>
+          <router-link to="/" style="color: #FFF56E; font-size: 30px">Get Back</router-link>
 
         </div>
         <h6>{{Released}}, {{Type}}, {{Runtime}}</h6>
