@@ -67,3 +67,21 @@ export default {
   },
 };
 </script>
+
+<style>
+.repartition{
+  display: flex;
+  height: 100vh;
+}
+.menu {
+  width: 12%;
+  height: auto;
+  background-color: #274172;
+  color: white;
+
+}
+.responsive {
+  width: 100%;
+  height: auto;
+}
+</style>

@@ -60,17 +60,7 @@ body {
 div {
   background-color: #274172;
 }
-.repartition{
-  display: flex;
-  height: 100vh;
-}
-.menu {
-  width: 12%;
-  height: auto;
-  background-color: #274172;
-  color: white;
 
-}
 .affichage_films {
   background-color: #274172;
   width: 88%;
@@ -117,10 +107,6 @@ div {
   font-size: 1.2vw;
 }
 
-.responsive {
-  width: 100%;
-  height: auto;
-}
 
 .film {
   width: auto;
