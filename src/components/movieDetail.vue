@@ -42,7 +42,7 @@
 
 <script>
 export default {
-  name: 'HelloWorld',
+  name: 'MovieDetail',
   props: {
     title: String,
     year: Number,

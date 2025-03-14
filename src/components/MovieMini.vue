@@ -10,7 +10,7 @@
 
 <script>
 export default {
-  name: 'HelloWorld',
+  name: 'HomeView',
   props: {
     title: String,
     year: Number,
@@ -21,6 +21,9 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+body {
+  margin: 0;
+}
 .displayMovie {
   height: 500px;
   width: 300px;
