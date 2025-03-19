@@ -44,11 +44,11 @@
         <form id="search-container">
           <div class="search">
             <span class="material-symbols-outlined">search</span>
-            <input class="search-input" type="search" placeholder="Search.." />
+            <input class="search-input" v-model="searchQuery" placeholder="Search for a movie..." @keyup.enter="fetchMovies" />
           </div>
         </form>
 
-        <div id="displayMovies">
+        <div id="display-movies">
           <MovieMini
           v-for="movie in movies"
           :key="movie.imdbID"
@@ -64,14 +64,15 @@
 
 <script>
 // @ is an alias to /src
-import axios from 'axios';
-import MovieMini from '../components/MovieMini.vue';
+import apiFilm from '@/services/apiFilm'; // Import the API service
+import MovieMini from '@/components/MovieMini.vue';
 
 export default {
   components: { MovieMini },
   data() {
     return {
       movies: [],
+      searchQuery: 'Batman', // Default search
     };
   },
   async mounted() {
@@ -80,12 +81,9 @@ export default {
   methods: {
     async fetchMovies() {
       try {
-        const response = await axios.get(
-          'https://www.omdbapi.com/?s=batman&apikey=ef8f4414'
-        );
-        this.movies = response.data.Search; // The API returns movies inside 'Search'
+        this.movies = await apiFilm.searchMovies(this.searchQuery);
       } catch (error) {
-        console.error('Error fetching movies:', error);
+        console.error('Failed to fetch movies');
       }
     },
   },
@@ -174,8 +172,9 @@ body {
   width: 400px;
 }
 
-#displayMovies {
+#display-movies {
   display: flex;
+  flex-wrap: wrap;
   flex-direction: row;
   justify-content: space-evenly;
 }
