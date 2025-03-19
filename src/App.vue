@@ -5,6 +5,7 @@
 <style>
 body{
   margin: 0px;
+  color: #2c3e50;
 }
 
 #app {
@@ -12,7 +13,7 @@ body{
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+
 }
 
 nav {

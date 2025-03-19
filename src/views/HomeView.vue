@@ -93,6 +93,7 @@ export default {
 <style scoped>
 body {
   margin: 0px;
+  height: min-content;
 }
 
 #app {
@@ -103,14 +104,14 @@ body {
 }
 
 .repartition {
-  height: 100%;
+  height: max-content;
   margin: 0px;
   display: flex;
 }
 
 .side-bar {
-  height: 100vh;
-  width: fit-content;
+  height: auto;
+  width: 13%;
   display: flex;
   flex-direction: column;
   background-color: #8e949d;
@@ -124,8 +125,8 @@ body {
 }
 
 .logo-image {
-  height: 30%;
-  width: fit-content;
+  height: 250px;
+  width: auto;
 }
 
 #display-home {
