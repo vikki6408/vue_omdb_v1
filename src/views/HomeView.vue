@@ -49,10 +49,13 @@
         </form>
 
         <div id="displayMovies">
-          <MovieMini :title="Title" :year="Year" :poster="Poster"/>
-          <MovieMini :title="Title" :year="Year" :poster="Poster"/>
-          <MovieMini :title="Title" :year="Year" :poster="Poster"/>
-          <MovieMini :title="Title" :year="Year" :poster="Poster"/>
+          <MovieMini
+          v-for="movie in movies"
+          :key="movie.imdbID"
+          :title="movie.Title"
+          :year="movie.Year"
+          :poster="movie.Poster"
+        />
         </div>
       </div>
     </div>
@@ -61,25 +64,35 @@
 
 <script>
 // @ is an alias to /src
-import MovieMini from '@/components/MovieMini.vue'
+import axios from 'axios';
+import MovieMini from '../components/MovieMini.vue';
 
 export default {
-  name: 'HomeView',
-  components: {
-    MovieMini,
-  },
+  components: { MovieMini },
   data() {
     return {
-      Title: `Blade Runner`,
-      Poster:
-          'https://m.media-amazon.com/images/M/MV5BOWQ4YTBmNTQtMDYxMC00NGFjLTkwOGQtNzdhNmY1Nzc1MzUxXkEyXkFqcGc@._V1_SX300.jpg',
-      Year: 1982,
-    }
+      movies: [],
+    };
   },
-}
+  async mounted() {
+    await this.fetchMovies();
+  },
+  methods: {
+    async fetchMovies() {
+      try {
+        const response = await axios.get(
+          'https://www.omdbapi.com/?s=batman&apikey=ef8f4414'
+        );
+        this.movies = response.data.Search; // The API returns movies inside 'Search'
+      } catch (error) {
+        console.error('Error fetching movies:', error);
+      }
+    },
+  },
+};
 </script>
 
-<style>
+<style scoped>
 body {
   margin: 0px;
 }
@@ -163,6 +176,7 @@ body {
 
 #displayMovies {
   display: flex;
+  flex-direction: row;
   justify-content: space-evenly;
 }
 </style>
