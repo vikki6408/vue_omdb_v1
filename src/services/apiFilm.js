@@ -1,16 +1,38 @@
-import axios from 'axios'
+import axios from 'axios';
 
-const apiFilm = axios.create({
-    baseURL: 'https://api.themoviedb.org/3/',
-    headers: {
-        accept: 'application/json',
-        Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI3MDk0OGY3YjUzMDY1NjlhZDUxZDc3ZDI5YmVmZTNhZiIsIm5iZiI6MTc0MTk0ODIxNi44NDA5OTk4LCJzdWIiOiI2N2Q0MDUzODAwYzg1YzVhMjg2NGZlYjkiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.8-TILMLy1tzn2P_rkVjXKMlqc150GtP5W0lQ5QNWjrM'
+const API_KEY = 'ef8f4414'; // Replace with your actual API key
+const BASE_URL = 'https://www.omdbapi.com/';
+
+const apiFilm = {
+  async searchMovies(query) {
+    try {
+      const response = await axios.get(`${BASE_URL}`, {
+        params: {
+          s: query,
+          apikey: API_KEY,
+        },
+      });
+      return response.data.Search || []; // Return an empty array if no results
+    } catch (error) {
+      console.error('Error fetching movies:', error);
+      throw error; // Rethrow to handle it in the component
     }
-});
+  },
 
-
-export default {
-    getfilm () {
-        return apiFilm.get('/popular')
+  async getMovieDetails(id) {
+    try {
+      const response = await axios.get(`${BASE_URL}`, {
+        params: {
+          i: id,
+          apikey: API_KEY,
+        },
+      });
+      return response.data;
+    } catch (error) {
+      console.error('Error fetching movie details:', error);
+      throw error;
     }
-}
+  },
+};
+
+export default apiFilm;
