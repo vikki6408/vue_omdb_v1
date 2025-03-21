@@ -2,7 +2,7 @@
   <div class="displayMovie">
     <img id="movieMiniature" :src="poster" />
     <div id="movieFooter">
-      <router-link to="/details" style="color: blue; font-size: 30px"> {{ title }} </router-link>
+      <h1 @click="handleMovieClick" style="color: blue; font-size: 30px"> {{ title }} </h1>
       <p>{{ year }}</p>
     </div>
   </div>
@@ -13,9 +13,17 @@ export default {
   name: 'MovieMini',
   props: {
     title: String,
-    year: Number,
+    year: String,
     poster: String,
+    imdbkey:String,
   },
+  methods:{
+    handleMovieClick(){
+      console.log("key : ", this.imdbkey)
+      this.$router.push({name: 'details', query: {id: this.imdbkey}})
+    }
+  }
+
 }
 </script>
 

@@ -50,9 +50,10 @@
 
         <div id="display-movies">
           <MovieMini
-          v-for="movie in movies"
+      é
           :key="movie.imdbID"
           :title="movie.Title"
+          :imdbkey="movie.imdbID"
           :year="movie.Year"
           :poster="movie.Poster"
         />

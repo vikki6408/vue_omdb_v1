@@ -6,7 +6,7 @@
       <MovieMini
         v-for="movie in movies"
         :key="movie.imdbID"
-        :title="movie.Title"
+        :title="movie.imdbID"
         :year="movie.Year"
         :poster="movie.Poster"
       />
