@@ -27,7 +27,7 @@ export default {
   background-color: #fff570;
   display: flex;
   flex-direction: column;
-  margin: 10px;
+  margin: 40px;
 }
 
 #movieMiniature {
@@ -37,6 +37,6 @@ export default {
 #movieFooter {
   color: black;
   font-size: 20px;
-  padding: 10px;
+  padding-top: 5px;
 }
 </style>
