@@ -19,21 +19,6 @@ const apiFilm = {
     }
   },
 
-  async getMovieDetails(Title) {
-    try {
-      const response = await axios.get(`${BASE_URL}`, {
-        params: {
-          t: Title,
-          apikey: API_KEY,
-        },
-      });
-      return response.data;
-    } catch (error) {
-      console.error('Error fetching movie details:', error);
-      throw error;
-    }
-  },
-
  getmovies(id){
     console.log("id film in api FILM _: ",id)
     return axios.get(
