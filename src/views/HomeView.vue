@@ -1,4 +1,7 @@
 <template>
+  <!--Link to the magnifying glass icon-->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=search" />
+  
   <div id="app">
     <div class="repartition">
       <div class="side-bar">
@@ -43,7 +46,7 @@
 
         <form id="search-container">
           <div class="search">
-            <span class="material-symbols-outlined">search</span>
+            <span  class="material-symbols-outlined">search</span>
             <input class="search-input" v-model="searchQuery" placeholder="Search for a movie..." @keyup.enter="fetchMovies" />
           </div>
         </form>
@@ -66,6 +69,7 @@
 // @ is an alias to /src
 import apiFilm from '@/services/apiFilm'; // Import the API service
 import MovieMini from '@/components/MovieMini.vue';
+
 
 export default {
   components: { MovieMini },
