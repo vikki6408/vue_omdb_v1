@@ -1,9 +1,13 @@
 <template>
   <!--Link to the magnifying glass icon-->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=search" />
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=search"
+  />
 
   <div id="app">
     <div class="repartition">
+      <!--Side navigation-->
       <div class="side-bar">
         <img class="logo-image" src="../assets/logo.png" />
 
@@ -42,23 +46,33 @@
       </div>
 
       <div id="display-home">
+        <!--Title-->
         <div id="title-home">Bienvenue sur JEVISIS's films!</div>
 
-        <form id="search-container">
+        <!--Search form-->
+        <form id="search-container" @submit.prevent="fetchMovies">
           <div class="search">
-            <span  class="material-symbols-outlined">search</span>
-            <input class="search-input" v-model="searchQuery" placeholder="Search for a movie..." @keyup.enter="fetchMovies" />
+            <span class="material-symbols-outlined">search</span>
+            <input
+              type="text"
+              class="search-input"
+              v-model="searchQuery"
+              placeholder="Search for a movie..."
+              required
+            />
           </div>
+          <button type="submit" class="btn btn-primary mt-3">Rechercher</button>
         </form>
 
+        <!-- Display of the movies-->
         <div id="display-movies">
           <MovieMini
-          v-for="movie in movies"
-          :key="movie.imdbID"
-          :title="movie.Title"
-          :year="movie.Year"
-          :poster="movie.Poster"
-        />
+            v-for="movie in movies"
+            :key="movie.imdbID"
+            :title="movie.Title"
+            :year="movie.Year"
+            :poster="movie.Poster"
+          />
         </div>
       </div>
     </div>
@@ -67,16 +81,15 @@
 
 <script>
 // @ is an alias to /src
-import apiFilm from '@/services/apiFilm'; // Import the API service
-import MovieMini from '@/components/MovieMini.vue';
-
+import apiFilm from "@/services/apiFilm"; // Import the API service
+import MovieMini from "@/components/MovieMini.vue";
 
 export default {
   components: { MovieMini },
   data() {
     return {
       movies: [],
-      searchQuery: 'Batman', // Default search
+      searchQuery: "Batman", // Default search
     };
   },
   async mounted() {
@@ -87,7 +100,7 @@ export default {
       try {
         this.movies = await apiFilm.searchMovies(this.searchQuery);
       } catch (error) {
-        console.error('Failed to fetch movies');
+        console.error("Failed to fetch movies");
       }
     },
   },
@@ -104,7 +117,7 @@ body {
   margin: 0px;
   padding: 0px;
   background-color: #274172;
-  font-family: 'lexend', sans-serif;
+  font-family: "lexend", sans-serif;
 }
 
 .repartition {
@@ -168,7 +181,7 @@ body {
 
 .search-input {
   font-size: 16px;
-  font-family: 'lexend', sans-serif;
+  font-family: "lexend", sans-serif;
   color: #333333;
   margin-left: 14px;
   outline: none;

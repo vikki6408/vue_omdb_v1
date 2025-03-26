@@ -1,7 +1,18 @@
 <template>
   <div>
     <h1>Movie List</h1>
-    <input v-model="searchQuery" placeholder="Search for a movie..." @keyup.enter="fetchMovies" />
+    <form @submit.prevent="fetchMovies">
+      <label for="film" class="form-label">Entrez un film :</label>
+      <input
+        type="text"
+        class="form-control"
+        id="city"
+        v-model="searchQuery"
+        placeholder="Ex: Paris, Tokyo, New York"
+        required
+      />
+      <button type="submit" class="btn btn-primary">Rechercher</button>
+    </form>
     <div class="movies-container">
       <MovieMini
         v-for="movie in movies"
