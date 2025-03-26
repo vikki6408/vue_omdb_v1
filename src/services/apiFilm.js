@@ -22,7 +22,7 @@ const apiFilm = {
   getMovies(id){
     console.log("id film in api FILM _: ",id)
     return axios.get(
-        `https://www.omdbapi.com/?i=${id}&apikey=ef8f4414`
+        `https://www.omdbapi.com/?i=${id}&plot=full&apikey=ef8f4414`
     )
   }
 

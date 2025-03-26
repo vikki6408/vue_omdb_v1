@@ -8,7 +8,7 @@
         <div id="rated">
           <h1>{{ movieDetail.Title }}</h1>
           <h3 id="cadre">{{ movieDetail.Rated }}</h3>
-          <router-link to="/" style="color: #fff56e; font-size: 30px"
+          <router-link to="/" id="getback"
             >Get Back</router-link
           >
         </div>
@@ -23,10 +23,10 @@
         <h5>Actors : {{ movieDetail.Actors }}</h5>
         <div class="vide"></div>
         <h5>Description :</h5>
-        <h6>{{ movieDetail.Plot }}</h6>
+        <h6 style="width: 1000px">{{ movieDetail.Plot }}</h6>
       </div>
     </div>
-    <div class="infos_film" style="margin-left: 10px">
+    <div class="infos_film">
       <div>
         <h5>Languages :</h5>
         <h6>{{ movieDetail.Language }}</h6>
@@ -69,20 +69,11 @@ body {
 div {
   background-color: #274172;
 }
-.repartition {
-  display: flex;
-  height: 100vh;
-}
-.menu {
-  width: 12%;
-  height: auto;
-  background-color: #274172;
-  color: white;
-}
+
 .affichage_films {
   background-color: #274172;
-  width: 88%;
-  height: auto;
+  padding-left: 50px;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   overflow: auto;
@@ -98,6 +89,8 @@ div {
   flex-direction: row;
   gap: 35px;
   font-size: 3px;
+  text-align: left;
+  margin-left: 10px;
 }
 
 #image {
@@ -109,6 +102,7 @@ div {
 #infos {
   margin-top: 50px;
   height: auto;
+  text-align: left;
 }
 
 .ratings {
@@ -122,11 +116,6 @@ div {
   margin-left: 20px;
   margin-right: 30px;
   font-size: 1.2vw;
-}
-
-.responsive {
-  width: 100%;
-  height: auto;
 }
 
 .film {
@@ -146,15 +135,16 @@ div {
 
 #getback {
   color: #fff56e;
-  margin-right: 10vh;
+  font-size: 30px
 }
 
 #cadre {
   border: 2px solid #fff56e;
+  width: auto;
   height: 40px;
-  width: 55px;
   margin-right: 80vh;
   margin-top: 10px;
   text-align: center;
+  margin-left: 20px;
 }
 </style>

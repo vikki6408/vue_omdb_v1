@@ -15,7 +15,7 @@ export default {
     title: String,
     year: String,
     poster: String,
-    imdbkey:String,
+    imdbkey: String,
   },
   methods:{
     handleMovieClick(){
