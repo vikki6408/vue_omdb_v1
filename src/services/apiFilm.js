@@ -19,20 +19,15 @@ const apiFilm = {
     }
   },
 
-  async getMovieDetails(id) {
-    try {
-      const response = await axios.get(`${BASE_URL}`, {
-        params: {
-          i: id,
-          apikey: API_KEY,
-        },
-      });
-      return response.data;
-    } catch (error) {
-      console.error('Error fetching movie details:', error);
-      throw error;
-    }
-  },
+  getMovies(id){
+    console.log("id film in api FILM _: ",id)
+    return axios.get(
+        `https://www.omdbapi.com/?i=${id}&apikey=ef8f4414`
+    )
+  }
+
+
 };
+
 
 export default apiFilm;

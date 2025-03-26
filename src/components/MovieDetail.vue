@@ -1,40 +1,51 @@
 <template>
-  <div class="affichage_films">
+  <div class="affichage_films" v-if="movieDetail">
     <div class="infos_film">
       <div id="image">
-        <img :src="Poster" alt="Blade runner" class="film">
+        <img :src="movieDetail.Poster" alt="Blade runner" class="film" />
       </div>
       <div id="infos">
         <div id="rated">
-          <h1>{{Title}}</h1>
-          <h3 id="cadre">{{Rated}}</h3>
-          <router-link to="/" style="color: #FFF56E; font-size: 30px">Get Back</router-link>
-
+          <h1>{{ movieDetail.Title }}</h1>
+          <h3 id="cadre">{{ movieDetail.Rated }}</h3>
+          <router-link to="/" style="color: #fff56e; font-size: 30px"
+            >Get Back</router-link
+          >
         </div>
-        <h6>{{Released}}, {{Type}}, {{Runtime}}</h6>
-        <h6>{{Genre}}</h6>
+        <h6>
+          {{ movieDetail.Released }}, {{ movieDetail.Type }},
+          {{ movieDetail.Runtime }}
+        </h6>
+        <h6>{{ movieDetail.Genre }}</h6>
         <div class="vide"></div>
-        <h5>Director :  {{Director}}</h5>
-        <h5>Writer :  {{Writer}}</h5>
-        <h5>Actors :  {{Actors}}</h5>
+        <h5>Director : {{ movieDetail.Director }}</h5>
+        <h5>Writer : {{ movieDetail.Writer }}</h5>
+        <h5>Actors : {{ movieDetail.Actors }}</h5>
         <div class="vide"></div>
         <h5>Description :</h5>
-        <h6>{{Plot}}</h6>
+        <h6>{{ movieDetail.Plot }}</h6>
       </div>
     </div>
-    <div class="infos_film" style="margin-left: 10px;">
+    <div class="infos_film" style="margin-left: 10px">
       <div>
         <h5>Languages :</h5>
-        <h6>{{Language}}</h6>
+        <h6>{{ movieDetail.Language }}</h6>
         <h5>Country :</h5>
-        <h6>{{Country}}</h6>
+        <h6>{{ movieDetail.Country }}</h6>
         <h5>Awards :</h5>
-        <h6>{{Awards}}</h6>
+        <h6>{{ movieDetail.Awards }}</h6>
         <div class="vide"></div>
         <h5>Evaluations :</h5>
-        <!-- <ul class="ratings">
-          <li class="rating" v-for="rating in Ratings">{{rating.Source}} <br> {{rating.Value}}</li>
-        </ul> -->
+        <ul class="ratings">
+          <li
+            class="rating"
+            v-for="item in movieDetail.Ratings"
+            :key="item.Value"
+          >
+            {{ item.Source }} <br />
+            {{ item.Value }}
+          </li>
+        </ul>
       </div>
     </div>
   </div>
@@ -42,13 +53,11 @@
 
 <script>
 export default {
-  name: 'MovieDetail',
+  name: "MovieDetail",
   props: {
-    title: String,
-    year: Number,
-    poster: String,
+    movieDetail: Object,
   },
-}
+};
 </script>
 
 <style scoped>
@@ -60,7 +69,7 @@ body {
 div {
   background-color: #274172;
 }
-.repartition{
+.repartition {
   display: flex;
   height: 100vh;
 }
@@ -69,7 +78,6 @@ div {
   height: auto;
   background-color: #274172;
   color: white;
-
 }
 .affichage_films {
   background-color: #274172;
@@ -90,7 +98,6 @@ div {
   flex-direction: row;
   gap: 35px;
   font-size: 3px;
-
 }
 
 #image {
@@ -135,22 +142,19 @@ div {
   display: flex;
   justify-content: space-between;
   color: aliceblue;
-
 }
 
-#getback{
-  color: #FFF56E;
+#getback {
+  color: #fff56e;
   margin-right: 10vh;
 }
 
-#cadre{
-  border: 2px solid #FFF56E;
+#cadre {
+  border: 2px solid #fff56e;
   height: 40px;
   width: 55px;
   margin-right: 80vh;
   margin-top: 10px;
   text-align: center;
-
-
 }
 </style>

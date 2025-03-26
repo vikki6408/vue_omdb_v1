@@ -7,7 +7,7 @@
 
   <div id="app">
     <div class="repartition">
-      <!--Side navigation-->
+      <!--Side nav-->
       <div class="side-bar">
         <img class="logo-image" src="../assets/logo.png" />
 
@@ -45,6 +45,7 @@
         </div>
       </div>
 
+      <!--Main content-->
       <div id="display-home">
         <!--Title-->
         <div id="title-home">Bienvenue sur JEVISIS's films!</div>
@@ -70,6 +71,7 @@
             v-for="movie in movies"
             :key="movie.imdbID"
             :title="movie.Title"
+            :imdbkey="movie.imdbID"
             :year="movie.Year"
             :poster="movie.Poster"
           />
