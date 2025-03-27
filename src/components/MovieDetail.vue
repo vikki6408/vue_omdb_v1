@@ -27,7 +27,7 @@
       </div>
     </div>
     <div class="infos_film">
-      <div>
+      <div id="infos_supplementaire">
         <h5>Languages :</h5>
         <h6>{{ movieDetail.Language }}</h6>
         <h5>Country :</h5>
@@ -102,8 +102,11 @@ div {
   margin-top: 50px;
   height: auto;
   text-align: left;
+  padding-left: 10px;
+  padding-right: 10px;
   background-color: #fff56e;
   border-radius: 20px;
+  border: 2px solid white;
 }
 
 .ratings {
@@ -134,21 +137,34 @@ div {
 #rated {
   display: flex;
   justify-content: space-between;
-  color: aliceblue;
+  color: black;
+  background-color: #fff56e;
+  border-radius: 20px;
 }
 
 #getback {
-  color: #fff56e;
-  font-size: 30px
+  color: black;
+  font-size: 30px;
+  text-decoration: none;
 }
 
 #cadre {
-  border: 2px solid #fff56e;
+  border: 2px solid black;
   width: auto;
   height: 40px;
-  margin-right: 80vh;
+  margin-right: 70vh;
   margin-top: 10px;
   text-align: center;
   margin-left: 20px;
+}
+
+#infos_supplementaire {
+  margin-top: 20px;
+  background-color: #fff56e;
+  border-radius: 20px;
+  border: 2px solid white;
+  padding-left: 10px;
+  padding-top: 10px;
+  width: 96%;
 }
 </style>
