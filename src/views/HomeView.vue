@@ -11,41 +11,22 @@
       <div class="side-bar">
         <img class="logo-image" src="../assets/logo.png" />
 
+        <!--Filter by type-->
         <div class="combobox">
           <p>Type</p>
-          <select name="type" id="type">
-            <option value="film">Film</option>
-            <option value="tv-show">Tv-show</option>
+          <select required name="type" v-model="type" @change="fetchMovies">
+            <option value="movie">Movie</option>
+            <option value="series">Series</option>
           </select>
         </div>
+
+        <!--Filter by year-->
         <div class="combobox">
-          <p>Genre</p>
-          <select name="genre" id="genre">
-            <option>Action</option>
-            <option>Thriller</option>
-            <option>Documentary</option>
-          </select>
-        </div>
-        <div class="combobox">
-          <p>Years</p>
-          <select name="years" id="years">
-            <option>new generation</option>
-            <option>2010-2020</option>
-            <option>2000-2010</option>
-            <option>1990-2000</option>
-            <option>1980-1990</option>
-          </select>
-        </div>
-        <div class="combobox">
-          <p>Rating</p>
-          <select name="rating" id="rating">
-            <option>0-5</option>
-            <option>5-10</option>
-          </select>
+          <div>Année : </div>
         </div>
       </div>
 
-      <!--Main content-->
+      <!--MAIN  CONTENT-->
       <div id="display-home">
         <!--Title-->
         <div id="title-home">Bienvenue sur JEVISIS's films!</div>
@@ -76,6 +57,13 @@
             :poster="movie.Poster"
           />
         </div>
+        <!-- page buttons-->
+        <div class="btn-display">
+          <button class="btn-page" @click="previousPage()">
+            Previous page
+          </button>
+          <button class="btn-page" @click="nextPage()">Next page</button>
+        </div>
       </div>
     </div>
   </div>
@@ -92,6 +80,8 @@ export default {
     return {
       movies: [],
       searchQuery: "Batman", // Default search
+      type: "movie", // Default search
+      page: 1,
     };
   },
   async mounted() {
@@ -100,9 +90,25 @@ export default {
   methods: {
     async fetchMovies() {
       try {
-        this.movies = await apiFilm.searchMovies(this.searchQuery);
+        this.movies = await apiFilm.searchMovies(
+          this.searchQuery,
+          this.type,
+          this.page
+        );
       } catch (error) {
         console.error("Failed to fetch movies");
+      }
+    },
+    nextPage() {
+      this.page += 1;
+      console.log(this.page);
+      this.fetchMovies();
+    },
+    previousPage() {
+      if (this.page > 1) {
+        this.page -= 1;
+        console.log(this.page);
+        this.fetchMovies();
       }
     },
   },
@@ -128,12 +134,29 @@ body {
   display: flex;
 }
 
+.btn-display {
+  display: flex;
+  justify-content: center;
+}
+.btn-page {
+  height: 80px;
+  width: 250px;
+  margin: 30px;
+  background: #fff56e;
+  border-radius: 25px;
+  color: #333333;
+  font-size: 22px;
+  border: 3px solid black;
+}
+
 .side-bar {
-  height: auto;
+  position: fixed;
+  height: 100%;
   width: 13%;
   display: flex;
   flex-direction: column;
   background-color: #8e949d;
+  border-right: 2px solid black;
 }
 
 .combobox {
@@ -153,6 +176,7 @@ body {
   width: 90%;
   display: flex;
   flex-direction: column;
+  margin-left: 13%;
 }
 
 #title-home {
@@ -160,7 +184,11 @@ body {
   margin-top: 7%;
   width: 100%;
   font-size: 70px;
-  color: #fff56e;
+  background-color: #fff56e;
+  color: black;
+  border-top: 2px solid black;
+  border-bottom: 2px solid black;
+  -webkit-text-stroke: 2px white;
 }
 
 #search-container {

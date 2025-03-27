@@ -35,10 +35,16 @@ export default {
   display: flex;
   flex-direction: column;
   margin: 40px;
+  border: 3px solid black;
+  border-radius: 25px;
+
 }
 
 #movieMiniature {
   height: 400px;
+  border-radius: 21px;
+  border: 2px solid white;
+
 }
 
 #movieFooter {

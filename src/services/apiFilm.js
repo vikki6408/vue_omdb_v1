@@ -4,11 +4,13 @@ const API_KEY = 'ef8f4414'; // Replace with your actual API key
 const BASE_URL = 'https://www.omdbapi.com/';
 
 const apiFilm = {
-  async searchMovies(query) {
+  async searchMovies(query, type, page) {
     try {
       const response = await axios.get(`${BASE_URL}`, {
         params: {
           s: query,
+          type: type,
+          page: page,
           apikey: API_KEY,
         },
       });
