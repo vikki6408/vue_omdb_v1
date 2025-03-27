@@ -71,7 +71,6 @@ div {
 }
 
 .affichage_films {
-  background-color: #274172;
   padding-left: 50px;
   height: 100vh;
   display: flex;
@@ -81,8 +80,7 @@ div {
 }
 
 .infos_film {
-  background-color: #274172;
-  color: white;
+  color: black;
   height: auto;
   width: 100%;
   display: flex;
@@ -97,12 +95,15 @@ div {
   margin-left: 10px;
   margin-top: 60px;
   height: 55vh;
+
 }
 
 #infos {
   margin-top: 50px;
   height: auto;
   text-align: left;
+  background-color: #fff56e;
+  border-radius: 20px;
 }
 
 .ratings {
@@ -121,10 +122,13 @@ div {
 .film {
   width: auto;
   height: auto;
+  border: 3px solid white;
+  border-radius: 20px;
 }
 
 .vide {
   height: 20px;
+  background-color: #fff56e;
 }
 
 #rated {
