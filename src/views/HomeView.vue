@@ -184,8 +184,9 @@ body {
   margin-top: 7%;
   width: 100%;
   font-size: 70px;
+  font-family: Blippo, fantasy;
   background-color: #fff56e;
-  color: black;
+  color: #274172;
   border-top: 2px solid black;
   border-bottom: 2px solid black;
   -webkit-text-stroke: 2px white;
