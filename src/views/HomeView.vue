@@ -1,58 +1,67 @@
 <template>
+  <!--Link to the magnifying glass icon-->
+  <link
+    rel="stylesheet"
+    href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=search"
+  />
+
   <div id="app">
     <div class="repartition">
+      <!--Side nav-->
       <div class="side-bar">
         <img class="logo-image" src="../assets/logo.png" />
 
+        <!--Filter by type-->
         <div class="combobox">
           <p>Type</p>
-          <select name="type" id="type">
-            <option value="film">Film</option>
-            <option value="tv-show">Tv-show</option>
-          </select>
-        </div>
-        <div class="combobox">
-          <p>Genre</p>
-          <select name="genre" id="genre">
-            <option>Action</option>
-            <option>Thriller</option>
-            <option>Documentary</option>
-          </select>
-        </div>
-        <div class="combobox">
-          <p>Years</p>
-          <select name="years" id="years">
-            <option>new generation</option>
-            <option>2010-2020</option>
-            <option>2000-2010</option>
-            <option>1990-2000</option>
-            <option>1980-1990</option>
-          </select>
-        </div>
-        <div class="combobox">
-          <p>Rating</p>
-          <select name="rating" id="rating">
-            <option>0-5</option>
-            <option>5-10</option>
+          <select required name="type" v-model="type" @change="fetchMovies">
+            <option value="movie">Movie</option>
+            <option value="series">Series</option>
           </select>
         </div>
       </div>
 
+      <!--MAIN  CONTENT-->
       <div id="display-home">
+        <!--Title-->
         <div id="title-home">Bienvenue sur JEVISIS's films!</div>
 
-        <form id="search-container">
+        <!--Search form-->
+        <form id="search-container" @submit.prevent="fetchMovies">
           <div class="search">
             <span class="material-symbols-outlined">search</span>
-            <input class="search-input" type="search" placeholder="Search.." />
+            <input
+              type="text"
+              class="search-input"
+              v-model="searchQuery"
+              placeholder="Search for a movie..."
+              required
+            />
           </div>
+          <button type="submit" class="btn btn-primary mt-3">Rechercher</button>
         </form>
 
-        <div id="displayMovies">
-          <MovieMini :title="Title" :year="Year" :poster="Poster"/>
-          <MovieMini :title="Title" :year="Year" :poster="Poster"/>
-          <MovieMini :title="Title" :year="Year" :poster="Poster"/>
-          <MovieMini :title="Title" :year="Year" :poster="Poster"/>
+        <!-- Display of the movies-->
+        <div id="display-movies">
+          <MovieMini
+            v-for="movie in movies"
+            :key="movie.imdbID"
+            :title="movie.Title"
+            :imdbkey="movie.imdbID"
+            :year="movie.Year"
+            :poster="movie.Poster"
+          />
+        </div>
+        <!-- page buttons-->
+        <div class="btn-display">
+          <button class="btn-page" @click="previousPage()">
+            Previous page
+          </button>
+          <!-- displays on wich page we are and how much there is-->
+          <p id="page-number">
+            Page {{ page }} sur {{ Math.floor(Number(totalResults) / 10 + 1) }}
+          </p>
+          <button class="btn-page" @click="nextPage()">Next page</button>
         </div>
       </div>
     </div>
@@ -61,48 +70,108 @@
 
 <script>
 // @ is an alias to /src
-import MovieMini from '@/components/MovieMini.vue'
+import apiFilm from "@/services/apiFilm"; // Import the API service
+import MovieMini from "@/components/MovieMini.vue";
 
 export default {
-  name: 'HomeView',
-  components: {
-    MovieMini,
-  },
+  components: { MovieMini },
   data() {
     return {
-      Title: `Blade Runner`,
-      Poster:
-          'https://m.media-amazon.com/images/M/MV5BOWQ4YTBmNTQtMDYxMC00NGFjLTkwOGQtNzdhNmY1Nzc1MzUxXkEyXkFqcGc@._V1_SX300.jpg',
-      Year: 1982,
-    }
+      movies: [],
+      searchQuery: "Batman", // Default search
+      type: "movie", // Default search
+      page: 1,
+      totalResults: null,
+      totalPages: null
+    };
   },
-}
+  async mounted() {
+    await this.fetchMovies();
+  },
+  methods: {
+    async fetchMovies() {
+      try {
+        this.movies = await apiFilm.searchMovies(
+          this.searchQuery,
+          this.type,
+          this.page
+        );
+        this.totalResults = await apiFilm.getTotalResults(
+          this.searchQuery,
+          this.type,
+          this.page
+        );
+        console.log(this.totalResults);
+      } catch (error) {
+        console.error("Failed to fetch movies");
+      }
+    },
+    nextPage() {
+      // If it is not equal greater than the number of total pages
+      if (this.page != Math.floor(Number(this.totalResults) / 10 + 1)) {
+        this.page += 1;
+        this.fetchMovies();
+      }
+    },
+    previousPage() {
+      if (this.page > 1) {
+        this.page -= 1;
+        this.fetchMovies();
+      }
+    },
+  },
+};
 </script>
 
-<style>
+<style scoped>
 body {
   margin: 0px;
+  height: min-content;
 }
 
 #app {
   margin: 0px;
   padding: 0px;
   background-color: #274172;
-  font-family: 'lexend', sans-serif;
+  font-family: "lexend", sans-serif;
+}
+
+#page-number {
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
 }
 
 .repartition {
-  height: 100%;
+  height: max-content;
   margin: 0px;
   display: flex;
 }
 
+.btn-display {
+  display: flex;
+  justify-content: center;
+}
+.btn-page {
+  height: 80px;
+  width: 250px;
+  margin: 30px;
+  background: white;
+  border-radius: 25px;
+  color: #333333;
+  font-size: 22px;
+  border: 3px solid black;
+}
+
 .side-bar {
-  height: 100vh;
-  width: fit-content;
+  position: fixed;
+  height: 100%;
+  width: 13%;
   display: flex;
   flex-direction: column;
   background-color: #8e949d;
+  border-right: 2px solid black;
 }
 
 .combobox {
@@ -113,8 +182,8 @@ body {
 }
 
 .logo-image {
-  height: 30%;
-  width: fit-content;
+  height: 250px;
+  width: auto;
 }
 
 #display-home {
@@ -122,6 +191,7 @@ body {
   width: 90%;
   display: flex;
   flex-direction: column;
+  margin-left: 13%;
 }
 
 #title-home {
@@ -129,7 +199,12 @@ body {
   margin-top: 7%;
   width: 100%;
   font-size: 70px;
-  color: #fff56e;
+  font-family: Blippo, fantasy;
+  background-color: #fff56e;
+  color: #274172;
+  border-top: 2px solid black;
+  border-bottom: 2px solid black;
+  -webkit-text-stroke: 2px white;
 }
 
 #search-container {
@@ -152,7 +227,7 @@ body {
 
 .search-input {
   font-size: 16px;
-  font-family: 'lexend', sans-serif;
+  font-family: "lexend", sans-serif;
   color: #333333;
   margin-left: 14px;
   outline: none;
@@ -161,8 +236,10 @@ body {
   width: 400px;
 }
 
-#displayMovies {
+#display-movies {
   display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
   justify-content: space-evenly;
 }
 </style>
