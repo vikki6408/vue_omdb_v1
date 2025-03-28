@@ -59,9 +59,8 @@
         </div>
         <!-- page buttons-->
         <div class="btn-display">
-          <button class="btn-page" @click="previousPage()">
-            Previous page
-          </button>
+          <button class="btn-page" @click="previousPage()">Previous page</button>
+          <p style="color: white; display: flex; flex-direction: column; justify-content: space-evenly;"> Page {{ page }} </p>
           <button class="btn-page" @click="nextPage()">Next page</button>
         </div>
       </div>
@@ -142,7 +141,7 @@ body {
   height: 80px;
   width: 250px;
   margin: 30px;
-  background: #fff56e;
+  background: white;
   border-radius: 25px;
   color: #333333;
   font-size: 22px;

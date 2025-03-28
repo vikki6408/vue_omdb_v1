@@ -145,16 +145,16 @@ div {
 }
 
 #getback {
-  color: #fff56e;
+  color: black;
   font-size: 25px;
   text-decoration: none;
-  background-color: #274172;
+  background-color: white;
   border-radius: 20px;
   width: 250px;
   height: 40px;
   text-align: center;
   margin-top: 5px;
-  border: 2px solid white;
+  border: 2px solid black;
 }
 
 #cadre {
@@ -185,7 +185,7 @@ div {
 }
 
 #evaluation {
-  background-color: #fff56e;
+  background-color: #8e949d;
   border-radius: 20px;
   border: 2px solid white;
   margin-top: 10px;
