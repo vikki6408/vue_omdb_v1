@@ -96,12 +96,13 @@ div {
 #image {
   margin-left: 10px;
   margin-top: 60px;
-  height: 55vh;
+  height: 48vh;
 
 }
 
 #infos {
   margin-top: 50px;
+  width: 96%;
   height: auto;
   text-align: left;
   padding-left: 10px;
