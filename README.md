@@ -1,4 +1,4 @@
-# vue-film
+# JEVISIS-film Vikki, Simon et Jérémie
 
 ## Project setup
 ```
