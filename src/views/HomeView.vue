@@ -19,11 +19,6 @@
             <option value="series">Series</option>
           </select>
         </div>
-
-        <!--Filter by year-->
-        <div class="combobox">
-          <div>Année : </div>
-        </div>
       </div>
 
       <!--MAIN  CONTENT-->
@@ -59,9 +54,13 @@
         </div>
         <!-- page buttons-->
         <div class="btn-display">
-          <button class="btn-page" @click="previousPage()">Previous page</button>
+          <button class="btn-page" @click="previousPage()">
+            Previous page
+          </button>
           <!-- displays on wich page we are and how much there is-->
-          <p id="page-number"> Page {{ page }} sur {{ Math.floor(Number(totalResults) /10 + 1) }} </p>
+          <p id="page-number">
+            Page {{ page }} sur {{ Math.floor(Number(totalResults) / 10 + 1) }}
+          </p>
           <button class="btn-page" @click="nextPage()">Next page</button>
         </div>
       </div>
@@ -83,6 +82,7 @@ export default {
       type: "movie", // Default search
       page: 1,
       totalResults: null,
+      totalPages: null
     };
   },
   async mounted() {
@@ -95,20 +95,23 @@ export default {
           this.searchQuery,
           this.type,
           this.page
-        )
+        );
         this.totalResults = await apiFilm.getTotalResults(
           this.searchQuery,
           this.type,
           this.page
-        )
-        console.log(this.totalResults)
+        );
+        console.log(this.totalResults);
       } catch (error) {
         console.error("Failed to fetch movies");
       }
     },
     nextPage() {
-      this.page += 1;
-      this.fetchMovies();
+      // If it is not equal greater than the number of total pages
+      if (this.page != Math.floor(Number(this.totalResults) / 10 + 1)) {
+        this.page += 1;
+        this.fetchMovies();
+      }
     },
     previousPage() {
       if (this.page > 1) {
@@ -133,10 +136,10 @@ body {
   font-family: "lexend", sans-serif;
 }
 
-#page-number{
-  color: white; 
-  display: flex; 
-  flex-direction: column; 
+#page-number {
+  color: white;
+  display: flex;
+  flex-direction: column;
   justify-content: space-evenly;
 }
 
