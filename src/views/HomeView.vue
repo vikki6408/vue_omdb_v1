@@ -60,7 +60,7 @@
         <!-- page buttons-->
         <div class="btn-display">
           <button class="btn-page" @click="previousPage()">Previous page</button>
-          <p style="color: white; display: flex; flex-direction: column; justify-content: space-evenly;"> Page {{ page }} </p>
+          <p id="page-number"> Page {{ page }} sur {{ Math.floor(Number(totalResults) /10) }} </p>
           <button class="btn-page" @click="nextPage()">Next page</button>
         </div>
       </div>
@@ -81,6 +81,7 @@ export default {
       searchQuery: "Batman", // Default search
       type: "movie", // Default search
       page: 1,
+      totalResults: null,
     };
   },
   async mounted() {
@@ -93,20 +94,24 @@ export default {
           this.searchQuery,
           this.type,
           this.page
-        );
+        )
+        this.totalResults = await apiFilm.getTotalResults(
+          this.searchQuery,
+          this.type,
+          this.page
+        )
+        console.log(this.totalResults)
       } catch (error) {
         console.error("Failed to fetch movies");
       }
     },
     nextPage() {
       this.page += 1;
-      console.log(this.page);
       this.fetchMovies();
     },
     previousPage() {
       if (this.page > 1) {
         this.page -= 1;
-        console.log(this.page);
         this.fetchMovies();
       }
     },
@@ -125,6 +130,13 @@ body {
   padding: 0px;
   background-color: #274172;
   font-family: "lexend", sans-serif;
+}
+
+#page-number{
+  color: white; 
+  display: flex; 
+  flex-direction: column; 
+  justify-content: space-evenly;
 }
 
 .repartition {

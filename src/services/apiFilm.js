@@ -21,6 +21,23 @@ const apiFilm = {
     }
   },
 
+  async getTotalResults(query, type, page) {
+    try {
+      const response = await axios.get(`${BASE_URL}`, {
+        params: {
+          s: query,
+          type: type,
+          page: page,
+          apikey: API_KEY,
+        },
+      });
+      return response.data.totalResults || []; // Return an empty array if no results
+    } catch (error) {
+      console.error('Error fetching total results:', error);
+      throw error; // Rethrow to handle it in the component
+    }
+  },
+
   getMovies(id){
     console.log("id film in api FILM _: ",id)
     return axios.get(
