@@ -60,7 +60,8 @@
         <!-- page buttons-->
         <div class="btn-display">
           <button class="btn-page" @click="previousPage()">Previous page</button>
-          <p id="page-number"> Page {{ page }} sur {{ Math.floor(Number(totalResults) /10) }} </p>
+          <!-- displays on wich page we are and how much there is-->
+          <p id="page-number"> Page {{ page }} sur {{ Math.floor(Number(totalResults) /10 + 1) }} </p>
           <button class="btn-page" @click="nextPage()">Next page</button>
         </div>
       </div>
