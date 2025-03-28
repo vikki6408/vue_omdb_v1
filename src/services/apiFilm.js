@@ -21,6 +21,7 @@ const apiFilm = {
     }
   },
 
+  // Used to get the total result (for the page number)
   async getTotalResults(query, type, page) {
     try {
       const response = await axios.get(`${BASE_URL}`, {
@@ -31,15 +32,14 @@ const apiFilm = {
           apikey: API_KEY,
         },
       });
-      return response.data.totalResults || []; // Return an empty array if no results
+      return response.data.totalResults || [];
     } catch (error) {
       console.error('Error fetching total results:', error);
-      throw error; // Rethrow to handle it in the component
+      throw error;
     }
   },
 
   getMovies(id){
-    console.log("id film in api FILM _: ",id)
     return axios.get(
         `https://www.omdbapi.com/?i=${id}&plot=full&apikey=ef8f4414`
     )
